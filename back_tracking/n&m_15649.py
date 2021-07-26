@@ -16,4 +16,3 @@ def solve(depth, n, m):
             out.pop()
 
 solve(0, N, M)
-n
