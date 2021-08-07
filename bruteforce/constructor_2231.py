@@ -1,10 +1,8 @@
 n = int(input())
-m = 0
+result = 0
 for i in range(n):
-    a = list(map(int, str(i)))
-    b = i + sum(a)
-    if b == n:
-        m = i
+    dcp = i + sum(int(j) for j in str(i))  # dcp = decomposition(분해합)
+    if dcp == n:  # 분해합이 n일 경우 결과값에 i값 할당, 반복문 종료
+        result = i
         break
-
-print(m)
+print(result)

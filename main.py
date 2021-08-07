@@ -1,14 +1,21 @@
-n = int(input())
-data = list(map(int, input().split()))
-data.sort()
+import sys
+sys.setrecursionlimit(10**6)
+def append_star(n):
+    if n == 1:
+        return ['*']
 
-result = 0  # 총 그룹의 수
-count = 0  # 현재 그룹에 포함된 모험가의 수
+    Stars = append_star(n//3)
+    L = []
 
-for i in data:
-    count += 1  # 현재 그룹에 모험가 포함시키기
-    if count >= i:  # 현재 그룹에 해당 모험가를 포함시키기
-        result += 1  # 현재 그룹에 포함된 모함가의 수가 현재의 공포도 이상이라면, 그룹 결성
-        count = 0 #  현재 그룹에 포함된 모험가의 수 초기화
+    for S in Stars:
+        L.append(S*3)
+    for S in Stars:
+        L.append(S + ' '*(n//3) + S)
+    for S in Stars:
+        L.append(S*3)
 
-print(result)  # 총 그룹의 수 출력
+    return L
+
+
+N = int(sys.stdin.readline().strip())
+print('\n'.join(append_star(N)))
