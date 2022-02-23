@@ -1,0 +1,5 @@
+apple: 사과
+church: 교회
+temple: 절
+wallet: 지갑
+backpack: 가방
