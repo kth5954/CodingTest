@@ -2,19 +2,21 @@
 import sys
 
 n, m = map(int, sys.stdin.readline().split())
-c = []
+arr = []
 for i in range(n):
-    c.append(int(sys.stdin.readline()))
+    arr.append(int(sys.stdin.readline()))
 
 d = [10001] * (m + 1)
 d[0] = 0
+
 for i in range(n):
-    for j in range(c[i], m + 1):
-        if d[j - c[i]] != 10001:
-            d[j] = min(d[j], d[j - c[i]] + 1)
-            print("j: %d,  d[%d]: %d" % (j, j, d[j]))
+    for j in range(arr[i], m + 1):
+        if d[j - arr[i]] != 10001:
+            d[j] = min(d[j], d[j - arr[i]] + 1)
 
-print(d)
-
+if d[m] == 10001:
+    print(-1)
+else:
+    print(d[m])
 
 
