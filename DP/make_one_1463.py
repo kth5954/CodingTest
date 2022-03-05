@@ -1,16 +1,14 @@
 import sys
 
 n = int(sys.stdin.readline())
+d = [0] * (n + 1)
 
-dp = [0] * (n + 1)
-dp[0] = 0
 for i in range(2, n + 1):
-    pre_ord = []
-    if i % 3 == 0:
-        pre_ord.append(dp[i // 3])
-    if i % 2 == 0:
-        pre_ord.append(dp[i // 2])
-    pre_ord.append(dp[i - 1])
-    dp[i] = min(pre_ord) + 1
+    arr = [d[i - 1]]
+    if not i % 3:
+        arr.append(d[i // 3])
+    if not i % 2:
+        arr.append(d[i // 2])
+    d[i] = min(arr) + 1
 
-print(dp[-1])
+print(d.pop())
