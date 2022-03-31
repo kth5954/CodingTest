@@ -28,5 +28,3 @@ def bfs(v):
 print(bfs(1))
 
 
-
-
