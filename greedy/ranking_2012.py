@@ -1,12 +1,14 @@
 import sys
-from itertools import permutations
 
 n = int(sys.stdin.readline())
 arr = []
-ans = 0
+k = [1] * (n + 1)
 for i in range(n):
-    arr.append(int(sys.stdin.readline()))
+    inp = int(sys.stdin.readline())
+    arr.append(inp)
+
 arr.sort()
+val = 0
 for i in range(n):
-    ans += abs(arr[i] - (i + 1))
-print(ans)
+    val += abs((i + 1) - arr[i])
+print(val)

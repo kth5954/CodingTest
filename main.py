@@ -1,50 +1,14 @@
 import sys
-from collections import deque
 
 n = int(sys.stdin.readline())
-graph = []
+arr = list(map(int, sys.stdin.readline().split()))
+arr.sort()
+
+acc = [0] * n
+
 for i in range(n):
-    graph.append(list(map(int, sys.stdin.readline().split())))
+    for j in range(i + 1):
+        acc[i] += arr[j]
+print(sum(acc))
 
-
-def bfs(g, x_init, y_init, k):
-    if visited[x_init][y_init] or g[x_init][y_init] < k:
-        return False
-    queue = deque([[x_init, y_init]])
-    visited[x_init][y_init] = 1
-    while queue:
-        x, y = queue.popleft()
-        dx = [1, -1, 0, 0]
-        dy = [0, 0, -1, 1]
-        for i in range(4):
-            nx = x + dx[i]
-            ny = y + dy[i]
-            if nx >= n or ny >= n or nx < 0 or ny < 0:
-                continue
-            if g[nx][ny] >= k and not visited[nx][ny]:
-                visited[nx][ny] = 1
-                queue.append([nx, ny])
-    return True
-
-
-max_cnt = 0
-for k in range(101):
-    cnt = 0
-    visited = [[0] * n for _ in range(n)]
-    for i in range(n):
-        for j in range(n):
-            if bfs(graph, i, j, k):
-                cnt += 1
-
-    if cnt > max_cnt:
-        max_cnt = cnt
-
-print(max_cnt)
-# for i in visited:
-#     print(i)
-
-# [6, 8, 2, 6, 2],
-# [3, 2, 3, 4, 6],
-# [6, 7, 3, 3, 2],
-# [7, 2, 5, 3, 6],
-# [8, 9, 5, 2, 7]
+# 1 2 3 3 4
