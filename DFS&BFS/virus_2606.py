@@ -1,30 +1,27 @@
 import sys
 from collections import deque
 
-n = int(sys.stdin.readline())
-m = int(sys.stdin.readline())
-graph = [[] for i in range(n + 1)]
-visited = [0] * (n + 1)
 
-for i in range(m):
-    a, b = map(int, sys.stdin.readline().split())
-    graph[a].append(b)
-    graph[b].append(a)
-
-def bfs(v):
-    queue = deque([v])
+def bfs(graph, v, visited):
     visited[v] = 1
-    cnt = 0
+    queue = deque([v])
     while queue:
         x = queue.popleft()
-        for k in graph[x]:
-            if not visited[k]:
-                visited[k] = 1
-                queue.append(k)
-                cnt += 1
-    return cnt
+        visited[x] = 1
+        for i in range(1, n + 1):
+            if graph[x][i] and not visited[i]:
+                queue.append(i)
 
 
-print(bfs(1))
+n = int(sys.stdin.readline())
+m = int(sys.stdin.readline())
+arr = [[0 for _ in range(n + 1)] for _ in range(n + 1)]
+visited = [0] * (n + 1)
+for i in range(m):
+    a, b = map(int, sys.stdin.readline().split())
+    arr[a][b] = 1
+    arr[b][a] = 1
 
+bfs(arr, 1, visited)
+print(sum(visited) - 1)
 

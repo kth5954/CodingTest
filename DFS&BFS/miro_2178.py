@@ -1,34 +1,35 @@
 import sys
 from collections import deque
 
-N, M = map(int, sys.stdin.readline().split())
-miro = []
-for i in range(N):
-    miro.append(list(map(int, sys.stdin.readline().rstrip())))
-
-
-# 너비 우선 탐색
-def bfs(graph, x, y):
-    dx = [-1, 1, 0, 0]
-    dy = [0, 0, -1, 1]
-    queue = deque()
-    queue.append((x, y))
+def bfs(graph, x0, y0):
+    queue = deque([[x0, y0]])
     while queue:
         x, y = queue.popleft()
+        if x == n - 1 and y == m - 1:
+            print(graph[x][y])
+            return True
         for i in range(4):
             nx = x + dx[i]
-            ny = y + dy[i]
-            if nx < 0 or nx >= N or ny < 0 or ny >= M:
+            ny = y - dy[i]
+            if nx < 0 or ny < 0 or nx >= n or ny >= m:
                 continue
-            if graph[nx][ny] == 0:
+            if graph[nx][ny] == 0 or graph[nx][ny] >= 2:
                 continue
-            if graph[nx][ny] == 1:
-                graph[nx][ny] = graph[x][y] + 1
-                queue.append((nx, ny))
-    return graph[N - 1][M - 1]
+            graph[nx][ny] = graph[x][y] + 1
+            queue.append([nx, ny])
+    return False
 
 
-print(bfs(miro, 0, 0))
+n, m = map(int, sys.stdin.readline().split())
+miro = []
+for i in range(n):
+    arr = list(map(int, sys.stdin.readline().rstrip()))
+    miro.append(arr)
+
+dx = [0, 0, -1, 1]
+dy = [1, -1, 0, 0]
+
+bfs(miro, 0, 0)
 
 
 
